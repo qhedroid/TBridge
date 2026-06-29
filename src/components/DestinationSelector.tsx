@@ -48,11 +48,12 @@ export function DestinationSelector({ state, onChange }: Props) {
 
       {/* Selected chips */}
       {state.destSelections.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-2.5">
+        <div className="chip-group">
           {state.destSelections.map((sel, idx) => (
             <span key={`${sel.city}|${sel.iana}|${idx}`} className="chip">
               {sel.city}
               <button
+                type="button"
                 onClick={() => removeSelection(idx)}
                 aria-label={`Remove ${sel.city}`}
                 className="chip-remove"
@@ -69,6 +70,7 @@ export function DestinationSelector({ state, onChange }: Props) {
         <input
           ref={inputRef}
           id={listId}
+          role="combobox"
           type="text"
           placeholder="Add a city…"
           value={query}
@@ -83,6 +85,7 @@ export function DestinationSelector({ state, onChange }: Props) {
           }}
           className="input"
           autoComplete="off"
+          aria-label="Search destination cities"
           aria-autocomplete="list"
           aria-expanded={open}
           aria-controls={`${listId}-list`}
@@ -101,23 +104,21 @@ export function DestinationSelector({ state, onChange }: Props) {
                   addSelection(result)
                 }}
               >
-                <div className="flex items-baseline justify-between">
-                  <span>
-                    <span className="font-medium">{result.city}</span>
-                    <span className="text-sm text-neutral-400 ml-1.5">{result.country}</span>
-                  </span>
+                <div className="dropdown-row-main">
+                  <span className="dropdown-city">{result.city}</span>
+                  <span className="dropdown-country">{result.country}</span>
                 </div>
-                {result.isAlias && result.hint && (
-                  <div className="text-xs text-indigo-400 mt-0.5">{result.hint}</div>
-                )}
+                <div className="dropdown-hint">
+                  {result.isAlias && result.hint ? result.hint : result.iana}
+                </div>
               </li>
             ))}
           </ul>
         )}
 
         {open && query.length > 0 && results.length === 0 && (
-          <div className="dropdown">
-            <p className="dropdown-item text-neutral-400 text-sm">No results for "{query}"</p>
+          <div className="dropdown" role="status" aria-live="polite">
+            <p className="dropdown-item dropdown-empty">No results for "{query}"</p>
           </div>
         )}
       </div>

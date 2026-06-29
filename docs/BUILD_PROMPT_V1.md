@@ -1,8 +1,8 @@
 # BUILD_PROMPT_V1.md
 
-You are Claude Code working inside the TimeBridge repository.
+You are Claude Code working inside the TBridge repository.
 
-Build V1 of TimeBridge as a small, polished, frontend-only timezone conversion web app.
+Build V1 of TBridge as a small, polished, frontend-only timezone conversion web app.
 
 Use:
 

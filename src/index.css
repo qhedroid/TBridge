@@ -1,6 +1,52 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    color-scheme: light;
+    --app-bg: #f7f6f2;
+    --app-text: #171717;
+    --app-text-muted: #5f5c55;
+    --app-text-subtle: #827e75;
+    --surface: #ffffff;
+    --surface-muted: #f0efea;
+    --surface-elevated: #ffffff;
+    --border: #dedbd2;
+    --border-strong: #c7c2b8;
+    --focus-ring: rgb(82 82 82 / 0.22);
+    --primary-bg: #171717;
+    --primary-text: #ffffff;
+    --primary-hover: #262626;
+    --source-bg: rgb(255 255 255 / 0.64);
+    --badge-bg: #f5f4ef;
+    --shadow: rgb(28 25 23 / 0.12);
+    --day-next-bg: #fff7ed;
+    --day-next-border: #fed7aa;
+    --day-next-text: #9a3412;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --app-bg: #09090b;
+    --app-text: #f5f5f5;
+    --app-text-muted: #a3a3a3;
+    --app-text-subtle: #737373;
+    --surface: #111113;
+    --surface-muted: #18181b;
+    --surface-elevated: #09090b;
+    --border: #27272a;
+    --border-strong: #3f3f46;
+    --focus-ring: rgb(212 212 212 / 0.18);
+    --primary-bg: #f5f5f5;
+    --primary-text: #09090b;
+    --primary-hover: #ffffff;
+    --source-bg: rgb(24 24 27 / 0.45);
+    --badge-bg: #18181b;
+    --shadow: rgb(0 0 0 / 0.35);
+    --day-next-bg: rgb(69 26 3 / 0.5);
+    --day-next-border: rgb(180 83 9 / 0.5);
+    --day-next-text: #fcd34d;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -10,6 +56,7 @@
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
       "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    background: var(--app-bg);
   }
 
   input[type="date"],
@@ -19,139 +66,400 @@
 }
 
 @layer components {
+  .app-shell {
+    @apply selection:bg-neutral-100 selection:text-neutral-950;
+    background: var(--app-bg);
+    color: var(--app-text);
+  }
 
-  /* ── Input sections: lighter than cards, no heavy border box ── */
+  .app-header {
+    @apply sticky top-0 z-20 border-b border-neutral-800/80 bg-neutral-950/95;
+    background: color-mix(in srgb, var(--app-bg) 94%, transparent);
+    border-color: var(--border);
+  }
+
+  .brand-lockup {
+    @apply flex items-center gap-2.5 min-w-0;
+  }
+
+  .brand-mark {
+    @apply h-6 w-6 shrink-0 rounded-md border border-neutral-800 bg-neutral-900
+           p-1 text-neutral-200;
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--app-text);
+  }
+
+  .brand-name {
+    @apply text-sm font-semibold tracking-normal text-neutral-100;
+    color: var(--app-text);
+  }
+
+  .header-controls {
+    @apply flex shrink-0 items-center gap-2;
+  }
+
+  .main-stack {
+    @apply pt-5 sm:pt-7;
+  }
+
   .input-section {
-    @apply py-3;
+    @apply py-4 sm:py-5;
+  }
+
+  .input-grid {
+    @apply grid grid-cols-1 gap-3 sm:grid-cols-[1fr_0.8fr_1.35fr] sm:gap-3;
   }
 
   .field-label {
-    @apply text-xs font-semibold uppercase tracking-widest text-neutral-500;
+    @apply text-[11px] font-semibold uppercase text-neutral-500;
+    color: var(--app-text-subtle);
   }
 
   .input-sublabel {
-    @apply text-xs text-neutral-500;
+    @apply text-[11px] font-medium text-neutral-500;
+    color: var(--app-text-subtle);
   }
 
   .input {
-    @apply w-full bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2
-           text-sm text-neutral-100 placeholder-neutral-600
-           focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
-           transition-colors;
+    @apply h-10 w-full rounded-md border border-neutral-800 bg-neutral-900/80
+           px-3 text-sm text-neutral-100 placeholder-neutral-500 shadow-none
+           outline-none transition-colors
+           hover:border-neutral-700 hover:bg-neutral-900
+           focus:border-neutral-500 focus:bg-neutral-900 focus:ring-2 focus:ring-neutral-700/35;
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+    border-color: var(--border);
+    color: var(--app-text);
+    caret-color: var(--app-text);
   }
 
-  /* ── Chips ── */
+  .input::placeholder {
+    color: var(--app-text-subtle);
+  }
+
+  .input:hover {
+    background: var(--surface);
+    border-color: var(--border-strong);
+  }
+
+  .input:focus {
+    background: var(--surface);
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+  }
+
+  .select-input {
+    @apply appearance-none pr-9;
+    background-image:
+      linear-gradient(45deg, transparent 50%, #a3a3a3 50%),
+      linear-gradient(135deg, #a3a3a3 50%, transparent 50%);
+    background-position:
+      calc(100% - 17px) 50%,
+      calc(100% - 12px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  .chip-group {
+    @apply mb-3 flex flex-wrap gap-1.5;
+  }
+
   .chip {
-    @apply inline-flex items-center gap-1 bg-neutral-800 border border-neutral-700
-           text-neutral-200 text-xs rounded-full px-2.5 py-1 font-medium;
+    @apply inline-flex min-h-7 items-center gap-1 rounded-md border border-neutral-700/90
+           bg-neutral-900 px-2.5 py-1 text-xs font-medium text-neutral-200
+           transition-colors hover:border-neutral-600 hover:bg-neutral-800;
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--app-text);
+  }
+
+  .chip:hover {
+    background: var(--surface-muted);
+    border-color: var(--border-strong);
   }
 
   .chip-remove {
-    @apply text-neutral-500 hover:text-neutral-100 transition-colors text-sm leading-none
-           cursor-pointer bg-transparent border-0 p-0 ml-0.5;
+    @apply ml-0.5 cursor-pointer border-0 bg-transparent p-0 text-sm leading-none
+           text-neutral-500 transition-colors hover:text-neutral-100
+           focus:outline-none focus-visible:text-neutral-100 focus-visible:ring-2
+           focus-visible:ring-neutral-600;
+    color: var(--app-text-subtle);
   }
 
-  /* ── Dropdown ── */
+  .chip-remove:hover,
+  .chip-remove:focus-visible {
+    color: var(--app-text);
+  }
+
   .dropdown {
-    @apply absolute top-full left-0 right-0 mt-1 z-10
-           bg-neutral-900 border border-neutral-800 rounded-lg shadow-2xl
-           max-h-64 overflow-y-auto;
+    @apply absolute left-0 right-0 top-full z-10 mt-1 max-h-72 overflow-y-auto
+           rounded-md border border-neutral-700/90 bg-neutral-950 shadow-xl shadow-black/35;
+    background: var(--surface-elevated);
+    border-color: var(--border-strong);
+    box-shadow: 0 16px 40px var(--shadow);
   }
 
   .dropdown-item {
-    @apply px-3 py-2 cursor-pointer hover:bg-neutral-800 transition-colors;
+    @apply cursor-pointer border-b border-neutral-800/70 px-3 py-2.5 transition-colors
+           last:border-b-0 hover:bg-neutral-900;
+    border-color: var(--border);
+    color: var(--app-text);
   }
 
-  /* ── Result rows — dense, not card-heavy ── */
+  .dropdown-item:hover {
+    background: var(--surface-muted);
+  }
+
+  .dropdown-row-main {
+    @apply flex items-baseline justify-between gap-3;
+  }
+
+  .dropdown-city {
+    @apply truncate text-sm font-semibold text-neutral-100;
+    color: var(--app-text);
+  }
+
+  .dropdown-country {
+    @apply shrink-0 text-xs text-neutral-500;
+    color: var(--app-text-subtle);
+  }
+
+  .dropdown-hint {
+    @apply mt-1 truncate text-[11px] text-neutral-500;
+    color: var(--app-text-muted);
+  }
+
+  .dropdown-empty {
+    color: var(--app-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .results-section {
+    @apply mt-2 border-t border-neutral-800/90 pt-2 sm:mt-3;
+    border-color: var(--border);
+  }
+
   .results-list {
-    @apply divide-y divide-neutral-800/60;
+    @apply divide-y divide-neutral-800/80;
+    border-color: var(--border);
+  }
+
+  .results-list > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--border);
+  }
+
+  .empty-state {
+    @apply py-8 text-center sm:py-10;
+  }
+
+  .empty-state-title {
+    @apply text-sm font-medium text-neutral-300;
+    color: var(--app-text-muted);
+  }
+
+  .empty-state-copy {
+    @apply mt-1 text-sm text-neutral-500;
+    color: var(--app-text-subtle);
   }
 
   .result-row {
-    @apply flex items-center justify-between py-3 gap-4;
+    @apply flex items-center justify-between gap-4 py-3.5 sm:py-4;
   }
 
   .result-row--source {
-    @apply opacity-100;
+    @apply -mx-2 rounded-md bg-neutral-900/45 px-2;
+    background: var(--source-bg);
   }
 
   .result-row--source .result-city-name {
-    @apply text-indigo-300;
+    @apply text-neutral-100;
   }
 
   .result-meta {
-    @apply flex flex-col gap-0.5 min-w-0;
+    @apply flex min-w-0 flex-col gap-1;
+  }
+
+  .result-title-line {
+    @apply flex min-w-0 items-center gap-2;
   }
 
   .result-city-name {
-    @apply font-semibold text-neutral-100 leading-tight;
+    @apply truncate text-sm font-semibold leading-tight text-neutral-100 sm:text-[15px];
+    color: var(--app-text);
   }
 
   .result-sub {
-    @apply text-xs text-neutral-500 leading-tight;
+    @apply truncate text-xs leading-tight text-neutral-500;
+    color: var(--app-text-muted);
+  }
+
+  .result-sub span {
+    color: var(--app-text-subtle);
   }
 
   .source-badge {
-    @apply inline-block text-[10px] font-semibold uppercase tracking-wider
-           text-indigo-500 leading-tight;
+    @apply inline-flex shrink-0 rounded border border-neutral-700 px-1.5 py-0.5
+           text-[9px] font-semibold uppercase leading-none text-neutral-400;
+    background: var(--badge-bg);
+    border-color: var(--border);
+    color: var(--app-text-muted);
   }
 
   .result-time-block {
-    @apply flex items-baseline gap-1.5 shrink-0 text-right;
+    @apply flex shrink-0 flex-col items-end gap-0.5 text-right;
+  }
+
+  .result-time-line {
+    @apply flex items-baseline gap-1.5;
   }
 
   .result-time-display {
-    @apply text-xl font-bold tabular-nums text-neutral-100;
+    @apply text-2xl font-semibold tabular-nums leading-none text-neutral-50 sm:text-[28px];
+    color: var(--app-text);
   }
 
   .result-abbr {
-    @apply text-xs font-semibold text-indigo-400 uppercase;
+    @apply text-[11px] font-semibold uppercase text-neutral-400;
+    color: var(--app-text-muted);
   }
 
   .result-date-display {
-    @apply text-xs text-neutral-500 ml-1;
+    @apply text-[11px] text-neutral-500;
+    color: var(--app-text-subtle);
   }
 
   .day-badge {
-    @apply text-[10px] font-bold px-1.5 py-0.5 rounded-full tabular-nums;
+    @apply rounded border px-1.5 py-0.5 text-[10px] font-semibold tabular-nums leading-none;
   }
 
   .day-badge--next {
-    @apply bg-amber-900/50 text-amber-300;
+    @apply border-amber-700/50 bg-amber-950/50 text-amber-300;
+    background: var(--day-next-bg);
+    border-color: var(--day-next-border);
+    color: var(--day-next-text);
   }
 
   .day-badge--prev {
-    @apply bg-neutral-800 text-neutral-400;
+    @apply border-neutral-700 bg-neutral-900 text-neutral-400;
+    background: var(--badge-bg);
+    border-color: var(--border);
+    color: var(--app-text-muted);
   }
 
-  /* ── Format toggle ── */
   .format-toggle {
-    @apply flex items-center bg-neutral-900 border border-neutral-800 rounded-lg p-0.5
-           cursor-pointer;
+    @apply flex cursor-pointer items-center rounded-md border border-neutral-800 bg-neutral-900
+           p-0.5 transition-colors hover:border-neutral-700
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-600;
+    background: var(--surface);
+    border-color: var(--border);
+  }
+
+  .format-toggle:hover {
+    border-color: var(--border-strong);
   }
 
   .format-option {
-    @apply px-2.5 py-1 text-xs font-medium rounded-md transition-colors text-neutral-500
-           cursor-pointer;
+    @apply cursor-pointer rounded px-2.5 py-1 text-xs font-medium text-neutral-500
+           transition-colors;
+    color: var(--app-text-subtle);
   }
 
   .format-option--active {
-    @apply bg-indigo-600 text-white;
+    @apply bg-neutral-100 text-neutral-950;
+    background: var(--primary-bg);
+    color: var(--primary-text);
   }
 
-  /* ── Buttons ── */
+  .theme-toggle {
+    @apply block;
+  }
+
+  .theme-select {
+    @apply h-8 cursor-pointer appearance-none rounded-md border px-2.5 pr-7 text-xs
+           font-medium outline-none transition-colors;
+    background:
+      linear-gradient(45deg, transparent 50%, var(--app-text-subtle) 50%),
+      linear-gradient(135deg, var(--app-text-subtle) 50%, transparent 50%),
+      var(--surface);
+    background-position:
+      calc(100% - 13px) 50%,
+      calc(100% - 9px) 50%,
+      0 0;
+    background-repeat: no-repeat;
+    background-size: 4px 4px, 4px 4px, auto;
+    border-color: var(--border);
+    color: var(--app-text-muted);
+  }
+
+  .theme-select:hover {
+    border-color: var(--border-strong);
+    color: var(--app-text);
+  }
+
+  .theme-select:focus {
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+  }
+
+  .action-bar {
+    @apply flex flex-col gap-2 pt-4 sm:flex-row sm:justify-end;
+  }
+
   .btn-primary {
-    @apply bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium
-           px-4 py-2 rounded-lg transition-colors cursor-pointer border-0;
+    @apply h-10 cursor-pointer rounded-md border border-neutral-100 bg-neutral-100 px-4
+           text-sm font-semibold text-neutral-950 transition-colors
+           hover:bg-white active:bg-neutral-300
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500;
+    background: var(--primary-bg);
+    border-color: var(--primary-bg);
+    color: var(--primary-text);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-hover);
   }
 
   .btn-secondary {
-    @apply bg-neutral-900 hover:bg-neutral-800 text-neutral-300 text-sm font-medium
-           px-4 py-2 rounded-lg transition-colors cursor-pointer border border-neutral-800;
+    @apply h-10 cursor-pointer rounded-md border border-neutral-800 bg-neutral-950 px-4
+           text-sm font-medium text-neutral-300 transition-colors
+           hover:border-neutral-700 hover:bg-neutral-900 active:bg-neutral-800
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-600;
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--app-text-muted);
   }
 
-  /* ── Divider between input area and results ── */
+  .btn-secondary:hover {
+    background: var(--surface-muted);
+    border-color: var(--border-strong);
+    color: var(--app-text);
+  }
+
   .section-divider {
-    @apply border-t border-neutral-800;
+    @apply border-t border-neutral-800/90;
+    border-color: var(--border);
+  }
+
+  .footer-line {
+    @apply flex flex-col items-center gap-1 py-8 text-center text-[11px] text-neutral-600;
+    color: var(--app-text-subtle);
+  }
+
+  @media (max-width: 520px) {
+    .result-row {
+      @apply items-start gap-3;
+    }
+
+    .result-time-display {
+      @apply text-[22px];
+    }
+
+    .dropdown-row-main {
+      @apply flex-col items-start gap-0.5;
+    }
+
+    .dropdown-country {
+      @apply shrink text-neutral-500;
+    }
   }
 }

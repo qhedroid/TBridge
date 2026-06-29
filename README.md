@@ -1,19 +1,62 @@
-# TimeBridge
+# TBridge
 
-A lightweight, frontend-only timezone conversion web app. Enter a date, time, and source city, then pick multiple destination cities to see correctly converted times with proper DST handling.
+TBridge is a small frontend-only timezone converter for comparing one source date and time across multiple destination cities. It uses IANA timezone IDs and Luxon for DST-aware conversion, with an offline city index for fast local search.
 
-## What it does
+## Overview
 
-- Converts a date and time from any source timezone to multiple destinations
-- Handles daylight saving time correctly via Luxon and IANA timezone IDs
-- Shows timezone abbreviations (BST, EDT, JST, etc.) appropriate to the date
-- Flags results that land on the previous or next day
-- 12h / 24h display toggle
-- Shareable URLs — full app state lives in the query string
-- Copy results to clipboard as plain text
-- Responsive, dark-mode UI
+The app is designed as a focused productivity utility: choose a source date, time, and timezone, add destination cities, then copy or share the resulting conversion. There is no backend, database, authentication, or runtime API.
 
-## Run locally
+## Features
+
+- DST-aware timezone conversion using Luxon
+- IANA timezone IDs as the source of truth
+- Offline city search with all world capitals and selected major secondary cities
+- Curated source timezone dropdown
+- Multiple destination cities
+- Source row plus compact result rows
+- Previous/next day indicators
+- 12h and 24h display modes
+- Copy results as plain text
+- Shareable URL state
+- Responsive dark UI
+
+## Screenshots
+
+Screenshots will be added for the v1.0.0 release.
+
+## Tech Stack
+
+| Tool | Purpose |
+| --- | --- |
+| Vite | Build tool and dev server |
+| React | UI framework |
+| TypeScript | Strict application types |
+| Tailwind CSS | Styling |
+| Luxon | Timezone conversion and formatting |
+| Vitest | Unit tests |
+
+## Architecture
+
+TBridge is a static browser app.
+
+- `src/data/timezones.ts` contains primary timezone options and search helpers.
+- `src/data/sourceTimezones.ts` contains the curated source dropdown list.
+- `src/data/cityIndex.ts` contains the offline city index used by destination search.
+- `src/utils/conversion.ts` handles Luxon conversion and formatting.
+- `src/hooks/useUrlState.ts` serializes app state into the URL.
+- `src/components/` contains the UI.
+
+All timezone calculations happen in the browser. The app does not manually calculate offsets.
+
+## Offline City Index
+
+The destination search uses a local city index rather than a runtime geocoding API. V1 includes all world capitals, selected major secondary cities, ranking metadata, aliases, and IANA timezone mappings.
+
+Search prioritizes exact city matches, then starts-with matches, then broader matches. Capital and major city priorities help keep ambiguous results useful.
+
+Future versions may generate the index from GeoNames or a similar open dataset.
+
+## Running Locally
 
 ```bash
 npm install
@@ -22,60 +65,29 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173).
 
-## Run tests
+## Testing
 
 ```bash
 npm test
 ```
 
-Runs 7 Vitest unit tests covering the core conversion utility across summer/winter DST scenarios.
+The test suite covers core conversion behavior, city search resolution, source dropdown constraints, and important ranking cases.
 
-## Build for production
+## Production Build
 
 ```bash
 npm run build
 ```
 
-Output goes to `dist/`. Preview the production build locally:
+The static build is written to `dist/`.
 
-```bash
-npm run preview
-```
+## Roadmap
 
-## Deploy to Vercel
+- RC1 QA and release polish
+- Screenshots for the README
+- Optional generated city index pipeline
+- Broader manual browser and mobile QA
 
-```bash
-npm install -g vercel
-vercel
-```
+## License
 
-Vercel auto-detects Vite. No configuration file needed. The app is entirely static — no server required.
-
-For subsequent deploys: `vercel --prod`
-
-## URL format
-
-App state is fully serialised in the URL:
-
-```
-?date=2026-06-30&time=17:00&src=Europe/London&dst=America/New_York,America/Denver,Asia/Tokyo&format=24h
-```
-
-Share any conversion by copying the URL from the browser address bar, or use the **Share link** button in the app.
-
-## Stack
-
-| Package | Version | Purpose |
-|---|---|---|
-| Vite | 8.x | Build tool and dev server |
-| React | 19.x | UI framework |
-| TypeScript | 5.x | Type safety (strict mode) |
-| Tailwind CSS | 4.x | Styling via `@tailwindcss/vite` |
-| Luxon | 3.x | Timezone conversion and DST handling |
-| Vitest | 4.x | Unit tests for conversion logic |
-
-## Known limitations
-
-- **Day offset capped at ±1**: `dayOffset` is typed as `-1 | 0 | 1`. Extreme combinations like UTC-12 → UTC+14 could theoretically produce a ±2 day offset, but no timezone pair in the curated dataset triggers this. Not handled in V1.
-- **Timezone abbreviation fallback**: Some Node.js builds lack full ICU data and return raw offset strings (e.g. `GMT+9`). The conversion utility includes a static fallback map covering all 25 curated timezones to ensure correct abbreviations in all environments.
-- **25 curated cities only**: V1 ships with a hand-picked list. Extending to a full IANA dataset is a straightforward V2 addition.
+No license has been selected yet.

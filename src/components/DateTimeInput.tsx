@@ -10,7 +10,7 @@ export function DateTimeInput({ state, onChange }: Props) {
   return (
     <div className="input-section">
       <label className="field-label mb-2 block">Convert from</label>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+      <div className="input-grid">
         <div className="flex flex-col gap-1">
           <label htmlFor="date-input" className="input-sublabel">Date</label>
           <input
@@ -37,7 +37,7 @@ export function DateTimeInput({ state, onChange }: Props) {
             id="source-tz"
             value={state.sourceIana}
             onChange={(e) => onChange({ sourceIana: e.target.value })}
-            className="input"
+            className="input select-input"
           >
             {SOURCE_TIMEZONES.map((tz) => (
               <option key={tz.iana} value={tz.iana}>

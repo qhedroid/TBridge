@@ -10,10 +10,11 @@ export function ResultCard({ result, isSource = false }: Props) {
 
   return (
     <div className={`result-row ${isSource ? 'result-row--source' : ''}`}>
-      {/* Left: city name + meta */}
       <div className="result-meta">
-        <span className="result-city-name">{result.city}</span>
-        {isSource && <span className="source-badge">source</span>}
+        <div className="result-title-line">
+          <span className="result-city-name">{result.city}</span>
+          {isSource && <span className="source-badge">source</span>}
+        </div>
         <span className="result-sub">
           {result.country}
           {result.isAlias && result.primaryCity && (
@@ -22,15 +23,16 @@ export function ResultCard({ result, isSource = false }: Props) {
         </span>
       </div>
 
-      {/* Right: time + date */}
       <div className="result-time-block">
-        {dayOffset !== 0 && (
-          <span className={`day-badge ${dayOffset === 1 ? 'day-badge--next' : 'day-badge--prev'}`}>
-            {dayOffset === 1 ? '+1' : '−1'}
-          </span>
-        )}
-        <span className="result-time-display">{result.displayTime}</span>
-        <span className="result-abbr">{result.abbreviation}</span>
+        <div className="result-time-line">
+          {dayOffset !== 0 && (
+            <span className={`day-badge ${dayOffset === 1 ? 'day-badge--next' : 'day-badge--prev'}`}>
+              {dayOffset === 1 ? '+1' : '−1'}
+            </span>
+          )}
+          <span className="result-time-display">{result.displayTime}</span>
+          <span className="result-abbr">{result.abbreviation}</span>
+        </div>
         <span className="result-date-display">{result.displayDate}</span>
       </div>
     </div>

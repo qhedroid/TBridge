@@ -37,11 +37,11 @@ export function CopyShareBar({ state, shareUrl }: Props) {
   if (state.destSelections.length === 0) return null
 
   return (
-    <div className="flex flex-wrap gap-2.5 justify-end pt-1">
-      <button onClick={copyText} className="btn-secondary">
+    <div className="action-bar">
+      <button type="button" onClick={copyText} className="btn-secondary">
         {copyState === 'copied-text' ? '✓ Copied' : 'Copy results'}
       </button>
-      <button onClick={copyUrl} className="btn-primary">
+      <button type="button" onClick={copyUrl} className="btn-primary">
         {copyState === 'copied-url' ? '✓ Copied link' : 'Share link'}
       </button>
     </div>

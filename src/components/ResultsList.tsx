@@ -24,7 +24,7 @@ export function ResultsList({ state }: Props) {
   )
 
   if (!sourceResult) {
-    return <p className="text-neutral-500 text-sm">Please select a valid source timezone.</p>
+    return <p className="empty-state-copy">Please select a valid source timezone.</p>
   }
 
   return (
@@ -34,9 +34,10 @@ export function ResultsList({ state }: Props) {
         <ResultCard key={`${result.city}|${result.iana}|${i}`} result={result} />
       ))}
       {state.destSelections.length === 0 && (
-        <p className="text-neutral-600 text-sm text-center py-3">
-          Add destination timezones above to see conversions.
-        </p>
+        <div className="empty-state">
+          <p className="empty-state-title">No destination cities selected.</p>
+          <p className="empty-state-copy">Search for one or more cities to compare local times.</p>
+        </div>
       )}
     </div>
   )

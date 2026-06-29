@@ -1,6 +1,6 @@
 # AGENTS.md
 
-You are building TimeBridge, a small frontend-only timezone conversion web app.
+You are building TBridge, a small frontend-only timezone conversion web app.
 
 Priorities:
 

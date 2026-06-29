@@ -1,6 +1,6 @@
 # TECHNICAL_BRIEF.md
 
-# TimeBridge Technical Brief
+# TBridge Technical Brief
 
 ## Recommended Stack
 
@@ -155,7 +155,7 @@ Final custom domain later
 
 ## City Search
 
-TimeBridge V1 uses a local offline city index that includes all world capitals and selected major secondary cities. The index (`src/data/cityIndex.ts`) carries `name`, `country`, `countryCode`, `timezoneIana`, optional `aliases[]`, a `priority` score, `capital` flag, and `tier` classification. Search is ranked by match tier (exact name → starts-with → contains → alias → country) and then by priority within each tier. Capital cities carry higher priority values, and major cities generally rank above regional cities.
+TBridge V1 uses a local offline city index that includes all world capitals and selected major secondary cities. The index (`src/data/cityIndex.ts`) carries `name`, `country`, `countryCode`, `timezoneIana`, optional `aliases[]`, a `priority` score, `capital` flag, and `tier` classification. Search is ranked by match tier (exact name → starts-with → contains → alias → country) and then by priority within each tier. Capital cities carry higher priority values, and major cities generally rank above regional cities.
 
 Every IANA timezone referenced by the city index should also have a primary entry in `src/data/timezones.ts`, with abbreviation fallback coverage in `src/utils/conversion.ts` where needed. Future versions may generate this index from GeoNames or a similar open dataset.
 

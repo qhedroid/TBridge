@@ -8,7 +8,7 @@ Every project should feel consistent, maintainable and professional from day one
 
 This standard applies to projects such as:
 
-TimeBridge
+TBridge
 SnipKit
 DocShot
 MediaForge
@@ -353,7 +353,7 @@ README has run instructions
 
 Use clear commits:
 
-feat: build TimeBridge v1
+feat: build TBridge v1
 fix: correct timezone alias resolution
 style: refine result card layout
 docs: add engineering standard

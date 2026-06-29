@@ -3,71 +3,79 @@ import { DateTimeInput } from './components/DateTimeInput'
 import { DestinationSelector } from './components/DestinationSelector'
 import { ResultsList } from './components/ResultsList'
 import { CopyShareBar } from './components/CopyShareBar'
+import { ThemeToggle } from './components/ThemeToggle'
+import { useTheme } from './hooks/useTheme'
 
-/**
- * Responsive container: full width on mobile (16px padding each side),
- * expands naturally on tablet, caps at 1040px centred on desktop.
- */
-const CONTAINER = 'w-full max-w-[1040px] mx-auto px-4 sm:px-6'
+const CONTAINER = 'w-full max-w-[960px] mx-auto px-4 sm:px-6'
 
 export default function App() {
   const [state, updateState, shareUrl] = useUrlState()
+  const theme = useTheme()
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
+    <div className="min-h-screen app-shell">
       {/* Header */}
-      <header className="border-b border-neutral-800/60">
-        <div className={`${CONTAINER} py-3.5 flex items-center justify-between`}>
-          <div className="flex items-center gap-2">
+      <header className="app-header">
+        <div className={`${CONTAINER} py-3 flex items-center justify-between gap-4`}>
+          <div className="brand-lockup" aria-label="TBridge">
             <svg
-              className="w-5 h-5 text-indigo-400"
+              className="brand-mark"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1.8}
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
+              <path d="M6.75 12a5.25 5.25 0 0 1 10.5 0" />
+              <path d="M4.25 15.5h15.5" />
+              <path d="M8.5 15.5V18" />
+              <path d="M15.5 15.5V18" />
+              <path d="M12 7.25V12l3 1.75" />
             </svg>
-            <span className="font-semibold tracking-tight">TimeBridge</span>
+            <span className="brand-name">TBridge</span>
           </div>
 
-          {/* 12h / 24h toggle */}
-          <button
-            onClick={() => updateState({ is24h: !state.is24h })}
-            className="format-toggle"
-            aria-label={`Switch to ${state.is24h ? '12-hour' : '24-hour'} format`}
-          >
-            <span className={`format-option ${state.is24h ? 'format-option--active' : ''}`}>
-              24h
-            </span>
-            <span className={`format-option ${!state.is24h ? 'format-option--active' : ''}`}>
-              12h
-            </span>
-          </button>
+          <div className="header-controls">
+            <ThemeToggle
+              mode={theme.mode}
+              resolvedTheme={theme.resolvedTheme}
+              onChange={theme.setMode}
+            />
+            <button
+              type="button"
+              onClick={() => updateState({ is24h: !state.is24h })}
+              className="format-toggle"
+              aria-pressed={!state.is24h}
+              aria-label={`Switch to ${state.is24h ? '12-hour' : '24-hour'} format`}
+            >
+              <span className={`format-option ${state.is24h ? 'format-option--active' : ''}`}>
+                24h
+              </span>
+              <span className={`format-option ${!state.is24h ? 'format-option--active' : ''}`}>
+                12h
+              </span>
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Input panel */}
-      <div className={CONTAINER}>
+      <main className={`${CONTAINER} main-stack`}>
         <DateTimeInput state={state} onChange={updateState} />
         <div className="section-divider" />
         <DestinationSelector state={state} onChange={updateState} />
-      </div>
 
-      {/* Results */}
-      <div className={`${CONTAINER} mt-4`}>
-        <div className="section-divider mb-1" />
-        <ResultsList state={state} />
-        <div className="mt-4">
+        <section className="results-section" aria-label="Converted times">
+          <ResultsList state={state} />
           <CopyShareBar state={state} shareUrl={shareUrl} />
-        </div>
-      </div>
+        </section>
+      </main>
 
-      <footer className={`${CONTAINER} py-8 text-xs text-neutral-700 text-center`}>
-        Luxon · IANA · DST-aware
+      <footer className={`${CONTAINER} footer-line`}>
+        <span>TBridge v1.0.0</span>
+        <span>Offline city index • IANA timezones • DST-aware</span>
       </footer>
     </div>
   )

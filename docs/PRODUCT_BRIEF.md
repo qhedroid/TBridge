@@ -1,10 +1,10 @@
 # PRODUCT_BRIEF.md
 
-# TimeBridge Product Brief
+# TBridge Product Brief
 
 ## Product Summary
 
-TimeBridge is a lightweight timezone conversion web app for quickly translating a date and time from one city or timezone into multiple other cities or timezones.
+TBridge is a lightweight timezone conversion web app for quickly translating a date and time from one city or timezone into multiple other cities or timezones.
 
 The app is designed for meetings, calls, online events, gaming sessions, distributed teams, travel planning and community coordination.
 
