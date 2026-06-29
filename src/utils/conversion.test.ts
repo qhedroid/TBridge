@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { convertTime } from './conversion'
-import { searchTimezones, findTimezoneByIana, tzToSelection } from '../data/timezones'
+import { SOURCE_TIMEZONES } from '../data/sourceTimezones'
+import { searchTimezones, findTimezoneByIana, tzToSelection, TIMEZONES } from '../data/timezones'
 import type { DestSelection } from '../types'
 
 /** Helper: build a DestSelection from a primary IANA timezone */
@@ -9,6 +10,23 @@ function sel(iana: string): DestSelection {
   if (!tz) throw new Error(`Unknown IANA: ${iana}`)
   return tzToSelection(tz)
 }
+
+// ─── Source timezone dropdown ───────────────────────────────────────────────
+
+describe('source timezone dropdown', () => {
+  it('includes London first as the default source timezone', () => {
+    expect(SOURCE_TIMEZONES[0]).toEqual({ city: 'London', iana: 'Europe/London' })
+  })
+
+  it('is curated and does not include every primary timezone entry', () => {
+    expect(SOURCE_TIMEZONES.length).toBeLessThan(TIMEZONES.length)
+  })
+
+  it('only references IANA values present in the full timezone dataset', () => {
+    const knownIana = new Set(TIMEZONES.map((tz) => tz.iana))
+    expect(SOURCE_TIMEZONES.every((tz) => knownIana.has(tz.iana))).toBe(true)
+  })
+})
 
 // ─── Core conversion: summer DST ─────────────────────────────────────────────
 
