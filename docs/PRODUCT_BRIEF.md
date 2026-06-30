@@ -61,7 +61,7 @@ Database
 Backend API
 Calendar integration
 Notifications
-AI natural language parsing
+Natural language parsing
 Mobile native app
 Payments
 Analytics

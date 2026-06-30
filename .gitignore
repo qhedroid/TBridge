@@ -47,3 +47,17 @@ test-results/
 .cursor/
 .codex/
 .claude/
+
+# Internal AI/tooling notes
+/internal/
+/prompts/
+/build-prompts/
+/handoff/
+/ai-notes/
+/agent-notes/
+*PROMPT*.md
+*CHATGPT*.md
+*AI_NOTES*.md
+*CODEX*.md
+*AGENT*.md
+CLAUDE.md

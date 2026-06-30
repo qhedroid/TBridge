@@ -62,8 +62,8 @@ project-name/
 │
 ├── tests/
 │
-├── CLAUDE.md
 ├── README.md
+├── docs/ENGINEERING.md
 ├── .gitignore
 ├── package.json
 └── tsconfig.json
@@ -191,7 +191,7 @@ Testing
 
 ### Phase 4 — Design Pass
 
-Use Claude Design only after the app works.
+Refine design only after the app works.
 
 Design should improve:
 
@@ -248,44 +248,18 @@ Premature authentication
 Premature analytics
 Complex routing for one-page apps
 
-## Claude Usage Model
+## Implementation Rules
 
-Use ChatGPT as product lead and technical reviewer.
-
-Use Claude Cowork for:
-
-Architecture review
-Trade-off review
-Planning
-Repository structure
-Refactoring judgement
-
-Use Claude Code for:
-
-Implementation
-Tests
-Build fixes
-Feature execution
-
-Use Claude Design for:
-
-Visual refinement
-UI hierarchy
-Interaction polish
-Design system improvements
-
-## Standard Claude Code Rules
-
-Claude Code must:
+Contributors must:
 
 Read all docs before coding
-Follow CLAUDE.md
+Follow `docs/ENGINEERING.md`
 Keep scope tight
 Run tests before completion
 Run production build before completion
 Summarise changes clearly
 
-Claude Code must not:
+Contributors must not:
 
 Add features without approval
 Add backend without approval
@@ -310,7 +284,7 @@ Slightly distinctive
 
 Avoid:
 
-Generic AI SaaS styling
+Generic software-as-a-service styling
 Glassmorphism
 Unnecessary gradients
 Huge cards everywhere

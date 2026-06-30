@@ -85,7 +85,7 @@ The static build is written to `dist/`.
 
 - RC1 QA and release polish
 - Screenshots for the README
-- Optional generated city index pipeline
+- Optional repeatable city index build pipeline
 - Broader manual browser and mobile QA
 
 ## License
