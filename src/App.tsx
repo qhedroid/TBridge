@@ -16,7 +16,7 @@ export default function App() {
     <div className="min-h-screen app-shell">
       {/* Header */}
       <header className="app-header">
-        <div className={`${CONTAINER} py-3 flex items-center justify-between gap-4`}>
+        <div className={`${CONTAINER} header-inner`}>
           <div className="brand-lockup" aria-label="TBridge">
             <span className="brand-badge" aria-hidden="true">
               <img
