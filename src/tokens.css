@@ -1,0 +1,425 @@
+/**
+ * Qhedroid Design System — CSS Design Tokens
+ * ============================================
+ * Version: 1.0.0
+ * Product: TBridge (first Qhedroid product)
+ *
+ * Usage
+ * -----
+ * Import this file BEFORE any product stylesheet.
+ * Product-specific overrides go in a separate file.
+ *
+ * All tokens use --qh-* prefix for cross-product portability.
+ * A new product copies this file and overrides only what differs.
+ *
+ * Font loading (add to <head>):
+ * <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+ */
+
+/* ─────────────────────────────────────────────────────────────
+   BASE RESET
+   ───────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Geist', ui-sans-serif, system-ui, -apple-system,
+               BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LIGHT MODE (default)
+   Canvas: warm parchment — not pure white, never grey
+   ───────────────────────────────────────────────────────────── */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ── Surfaces ─────────────── */
+  --qh-bg:         #f7f6f2;   /* Parchment — primary canvas */
+  --qh-surface-1:  #ffffff;   /* Cards, inputs, elevated components */
+  --qh-surface-2:  #f0efea;   /* Hover state, muted panels */
+  --qh-surface-3:  #e8e4dd;   /* Strong muted — rarely used */
+
+  /* ── Text ─────────────────── */
+  --qh-text:       #171717;   /* Primary — near-black */
+  --qh-text-2:     #5f5c55;   /* Secondary — warm mid-grey */
+  --qh-text-3:     #87837a;   /* Tertiary — labels, placeholders */
+
+  /* ── Borders ──────────────── */
+  --qh-border:     #e0ddd4;   /* Default border — warm beige-grey */
+  --qh-border-2:   #ccc8be;   /* Strong border — hover/focus */
+
+  /* ── Accent — Qhedroid Teal ─ */
+  --qh-accent:     #0f766e;   /* Primary actions, logo mark */
+  --qh-accent-hov: #0d9488;   /* Hover — slightly lighter */
+  --qh-accent-fg:  #ffffff;   /* Text on accent background */
+  --qh-accent-sub: rgba(15, 118, 110, 0.10); /* Subtle teal tint */
+
+  /* ── Focus ring ───────────── */
+  --qh-focus:      rgba(15, 118, 110, 0.28); /* Teal glow — 3px ring */
+
+  /* ── Semantic: Day change ─── */
+  --qh-day-next-bg:  #fff7ed;          /* Amber bg — +1 day badge */
+  --qh-day-next-bdr: #fed7aa;          /* Amber border */
+  --qh-day-next-fg:  #9a3412;          /* Amber text */
+  --qh-day-prev-bg:  #f2f1ec;          /* Muted bg — −1 day badge */
+  --qh-day-prev-bdr: #e0ddd4;
+  --qh-day-prev-fg:  #87837a;
+
+  /* ── Component tokens ─────── */
+  --qh-btn-bg:     #ffffff;
+  --qh-btn-hov:    #f0efea;
+  --qh-btn-fg:     #5f5c55;
+  --qh-btn-bdr:    #dddad1;
+
+  --qh-badge-bg:   #f2f1ec;
+  --qh-badge-bdr:  #dddad1;
+  --qh-badge-fg:   #87837a;
+
+  --qh-src-bg:     rgba(255, 255, 255, 0.72); /* Source row highlight */
+
+  /* Logo mark colour */
+  --qh-mark:       #0f766e;
+
+  /* ── Elevation / Shadow ───── */
+  --qh-shadow:     rgba(28, 25, 23, 0.09);
+  --qh-shadow-2:   rgba(28, 25, 23, 0.13);
+  --qh-shadow-sm:  0 1px 2px var(--qh-shadow);
+  --qh-shadow-md:  0 4px 12px var(--qh-shadow), 0 1px 3px var(--qh-shadow);
+  --qh-shadow-lg:  0 12px 32px var(--qh-shadow-2), 0 2px 6px var(--qh-shadow);
+
+  /* ── Header ───────────────── */
+  --qh-hdr:        rgba(247, 246, 242, 0.92); /* Frosted header bg */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DARK MODE
+   Canvas: GitHub blue-grey — lifted, not pure black
+   ───────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ── Surfaces ─────────────── */
+  --qh-bg:         #0f1117;   /* Charcoal — blue-grey dark canvas */
+  --qh-surface-1:  #161b22;   /* Cards, inputs (GitHub dark surface) */
+  --qh-surface-2:  #1c2128;   /* Hover state */
+  --qh-surface-3:  #21262d;   /* Strong muted */
+
+  /* ── Text ─────────────────── */
+  --qh-text:       #e6edf3;   /* Primary — GitHub dark text */
+  --qh-text-2:     #8d96a0;   /* Secondary */
+  --qh-text-3:     #656d76;   /* Tertiary — labels, placeholders */
+
+  /* ── Borders ──────────────── */
+  --qh-border:     #30363d;   /* GitHub dark border */
+  --qh-border-2:   #484f58;   /* Strong border */
+
+  /* ── Accent — same hue, legible on dark ─ */
+  --qh-accent:     #0f766e;   /* Filled button stays teal */
+  --qh-accent-hov: #0d9488;
+  --qh-accent-fg:  #ffffff;
+  --qh-accent-sub: rgba(15, 118, 110, 0.18);
+
+  /* ── Focus ring ───────────── */
+  --qh-focus:      rgba(45, 212, 191, 0.22); /* Lighter teal glow */
+
+  /* ── Semantic: Day change ─── */
+  --qh-day-next-bg:  rgba(69, 26, 3, 0.55);
+  --qh-day-next-bdr: rgba(180, 83, 9, 0.55);
+  --qh-day-next-fg:  #fcd34d;             /* Amber on dark */
+  --qh-day-prev-bg:  #1c2128;
+  --qh-day-prev-bdr: #30363d;
+  --qh-day-prev-fg:  #656d76;
+
+  /* ── Component tokens ─────── */
+  --qh-btn-bg:     #161b22;
+  --qh-btn-hov:    #1c2128;
+  --qh-btn-fg:     #8d96a0;
+  --qh-btn-bdr:    #30363d;
+
+  --qh-badge-bg:   #1c2128;
+  --qh-badge-bdr:  #30363d;
+  --qh-badge-fg:   #656d76;
+
+  --qh-src-bg:     rgba(255, 255, 255, 0.04);
+
+  /* Logo mark — lighter teal for legibility on dark bg */
+  --qh-mark:       #2dd4bf;
+
+  /* ── Elevation / Shadow ───── */
+  --qh-shadow:     rgba(0, 0, 0, 0.35);
+  --qh-shadow-2:   rgba(0, 0, 0, 0.55);
+  --qh-shadow-sm:  0 1px 2px var(--qh-shadow);
+  --qh-shadow-md:  0 4px 12px var(--qh-shadow), 0 1px 3px var(--qh-shadow);
+  --qh-shadow-lg:  0 12px 32px var(--qh-shadow-2), 0 2px 6px var(--qh-shadow);
+
+  /* ── Header ───────────────── */
+  --qh-hdr:        rgba(15, 17, 23, 0.92);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TYPOGRAPHY SCALE
+   ───────────────────────────────────────────────────────────── */
+
+/*
+  --qh-font-sans:  'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif
+  --qh-font-mono:  'Geist Mono', 'JetBrains Mono', ui-monospace, monospace
+
+  Scale reference:
+  ┌──────────────┬──────┬────────┬─────────────────────────────────┐
+  │ Role         │  px  │ weight │ Notes                           │
+  ├──────────────┼──────┼────────┼─────────────────────────────────┤
+  │ Display      │  48  │  800   │ Hero headings, brand statements │
+  │ Title        │  32  │  700   │ Page titles                     │
+  │ Heading      │  20  │  600   │ Section headings                │
+  │ Body         │  15  │  400   │ Primary reading text            │
+  │ Body small   │  14  │  400   │ UI body, inputs                 │
+  │ Caption      │  12  │  400   │ Secondary info, dates           │
+  │ Label        │  10  │  700   │ UPPERCASE · +0.09em tracking    │
+  │ Sublabel     │  11  │  500   │ Field labels                    │
+  ├──────────────┼──────┼────────┼─────────────────────────────────┤
+  │ Time display │  34  │  600   │ Geist Mono · tabular-nums       │
+  │ Time small   │  26  │  600   │ Geist Mono · mobile breakpoint  │
+  │ Abbrev       │  11  │  600   │ Geist · UPPERCASE · +0.05em     │
+  └──────────────┴──────┴────────┴─────────────────────────────────┘
+*/
+
+/* ─────────────────────────────────────────────────────────────
+   SPACING SCALE (base-4 grid)
+   ───────────────────────────────────────────────────────────── */
+
+/*
+  --qh-space-1:   4px
+  --qh-space-2:   8px
+  --qh-space-3:   12px
+  --qh-space-4:   16px
+  --qh-space-5:   20px
+  --qh-space-6:   24px
+  --qh-space-8:   32px
+  --qh-space-10:  40px
+  --qh-space-12:  48px
+  --qh-space-16:  64px
+  --qh-space-20:  80px
+*/
+
+/* ─────────────────────────────────────────────────────────────
+   BORDER RADIUS SCALE
+   ───────────────────────────────────────────────────────────── */
+
+/*
+  --qh-radius-sm:  4px   — badges, small labels
+  --qh-radius-md:  7px   — logo badge, small chips
+  --qh-radius-lg:  8px   — inputs, buttons, select
+  --qh-radius-xl:  10px  — result rows (source highlight)
+  --qh-radius-2xl: 12px  — cards, dropdowns
+*/
+
+/* ─────────────────────────────────────────────────────────────
+   MOTION
+   All interactive transitions use 150ms ease-out.
+   No bounce. No spring. Immediate response, fast settle.
+   ───────────────────────────────────────────────────────────── */
+
+/*
+  --qh-transition: 150ms ease-out
+  Properties to transition: color, background-color, border-color, box-shadow
+  Never transition: width, height, position, layout — avoid reflow
+*/
+
+/* ─────────────────────────────────────────────────────────────
+   COMPONENT PATTERNS
+   Drop these directly into product CSS
+   ───────────────────────────────────────────────────────────── */
+
+/* Input — base */
+.qh-input {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--qh-border);
+  background: color-mix(in srgb, var(--qh-surface-1) 85%, transparent);
+  color: var(--qh-text);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 0 12px;
+  outline: none;
+  transition: border-color 150ms ease-out,
+              background   150ms ease-out,
+              box-shadow   150ms ease-out;
+  caret-color: var(--qh-accent);
+}
+.qh-input::placeholder { color: var(--qh-text-3); }
+.qh-input:hover  { border-color: var(--qh-border-2); background: var(--qh-surface-1); }
+.qh-input:focus  { border-color: var(--qh-border-2); background: var(--qh-surface-1);
+                   box-shadow: 0 0 0 3px var(--qh-focus); }
+
+/* Button — primary (teal) */
+.qh-btn-primary {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 8px;
+  border: 1px solid var(--qh-accent);
+  background: var(--qh-accent);
+  color: var(--qh-accent-fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  outline: none;
+  white-space: nowrap;
+}
+.qh-btn-primary:hover  { background: var(--qh-accent-hov); border-color: var(--qh-accent-hov); }
+.qh-btn-primary:focus-visible { box-shadow: 0 0 0 3px var(--qh-focus); }
+
+/* Button — secondary */
+.qh-btn-secondary {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 8px;
+  border: 1px solid var(--qh-btn-bdr);
+  background: var(--qh-btn-bg);
+  color: var(--qh-btn-fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms ease-out;
+  outline: none;
+  white-space: nowrap;
+}
+.qh-btn-secondary:hover { background: var(--qh-btn-hov); border-color: var(--qh-border-2); color: var(--qh-text); }
+.qh-btn-secondary:focus-visible { box-shadow: 0 0 0 3px var(--qh-focus); }
+
+/* Chip */
+.qh-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 4px 0 10px;
+  border-radius: 7px;
+  border: 1px solid var(--qh-border);
+  background: var(--qh-surface-1);
+  color: var(--qh-text);
+  font-size: 12px;
+  font-weight: 500;
+  transition: border-color 150ms ease-out, background 150ms ease-out;
+}
+.qh-chip:hover { border-color: var(--qh-border-2); background: var(--qh-surface-2); }
+
+/* Chip remove button */
+.qh-chip-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--qh-text-3);
+  border-radius: 4px;
+  padding: 0;
+  transition: color 150ms ease-out;
+  flex-shrink: 0;
+}
+.qh-chip-remove:hover { color: var(--qh-text); }
+
+/* Dropdown */
+.qh-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  border-radius: 10px;
+  border: 1px solid var(--qh-border-2);
+  background: var(--qh-surface-1);
+  box-shadow: var(--qh-shadow-lg);
+  overflow: hidden;
+  list-style: none;
+  padding: 4px;
+}
+
+.qh-dropdown-item {
+  padding: 9px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 0 2px;
+  transition: background 100ms ease-out;
+}
+.qh-dropdown-item:hover,
+.qh-dropdown-item[aria-selected="true"] { background: var(--qh-surface-2); }
+
+/* Badge */
+.qh-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 17px;
+  padding: 0 5px;
+  border-radius: 4px;
+  border: 1px solid var(--qh-badge-bdr);
+  background: var(--qh-badge-bg);
+  color: var(--qh-badge-fg);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Field label */
+.qh-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--qh-text-3);
+  margin-bottom: 12px;
+}
+
+/* Sublabel */
+.qh-sublabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--qh-text-3);
+  margin-bottom: 5px;
+}
+
+/* Time display — result card hero */
+.qh-time {
+  font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--qh-text);
+}
+
+/* Focus visible — global */
+:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px var(--qh-focus);
+  border-radius: 6px;
+}
+
+/* Selection */
+::selection {
+  background: var(--qh-accent-sub);
+  color: var(--qh-text);
+}

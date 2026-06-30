@@ -6,7 +6,7 @@ import { CopyShareBar } from './components/CopyShareBar'
 import { ThemeToggle } from './components/ThemeToggle'
 import { useTheme } from './hooks/useTheme'
 
-const CONTAINER = 'w-full max-w-[960px] mx-auto px-4 sm:px-6'
+const CONTAINER = 'page-container'
 
 export default function App() {
   const [state, updateState, shareUrl] = useUrlState()
@@ -18,22 +18,18 @@ export default function App() {
       <header className="app-header">
         <div className={`${CONTAINER} py-3 flex items-center justify-between gap-4`}>
           <div className="brand-lockup" aria-label="TBridge">
-            <svg
-              className="brand-mark"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.8}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6.75 12a5.25 5.25 0 0 1 10.5 0" />
-              <path d="M4.25 15.5h15.5" />
-              <path d="M8.5 15.5V18" />
-              <path d="M15.5 15.5V18" />
-              <path d="M12 7.25V12l3 1.75" />
-            </svg>
+            <span className="brand-badge" aria-hidden="true">
+              <img
+                src="/assets/tbridge-mark.svg"
+                alt=""
+                className="brand-logo-img brand-logo-img--light"
+              />
+              <img
+                src="/assets/tbridge-mark-dark.svg"
+                alt=""
+                className="brand-logo-img brand-logo-img--dark"
+              />
+            </span>
             <span className="brand-name">TBridge</span>
           </div>
 
@@ -74,8 +70,11 @@ export default function App() {
       </main>
 
       <footer className={`${CONTAINER} footer-line`}>
-        <span>TBridge v1.0.0</span>
-        <span>Offline city index • IANA timezones • DST-aware</span>
+        <img src="/assets/tbridge-mark.svg" alt="" className="footer-mark footer-mark--light" />
+        <img src="/assets/tbridge-mark-dark.svg" alt="" className="footer-mark footer-mark--dark" />
+        <span>TBridge v1.1</span>
+        <span className="footer-dot">·</span>
+        <span>Offline city index · IANA timezones · DST-aware</span>
       </footer>
     </div>
   )

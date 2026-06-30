@@ -18,7 +18,7 @@ export function ResultCard({ result, isSource = false }: Props) {
         <span className="result-sub">
           {result.country}
           {result.isAlias && result.primaryCity && (
-            <> · <span className="text-neutral-600">{result.iana}</span></>
+            <> · <span>{result.iana}</span></>
           )}
         </span>
       </div>
