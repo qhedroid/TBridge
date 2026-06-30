@@ -2,6 +2,8 @@
 
 TBridge is a small frontend-only timezone converter for comparing one source date and time across multiple destination cities. It uses IANA timezone IDs and Luxon for DST-aware conversion, with an offline city index for fast local search.
 
+![TBridge timezone converter preview](docs/assets/tbridge-screenshot.png)
+
 ## Overview
 
 The app is designed as a focused productivity utility: choose a source date, time, and timezone, add destination cities, then copy or share the resulting conversion. There is no backend, database, authentication, or runtime API.
@@ -19,10 +21,6 @@ The app is designed as a focused productivity utility: choose a source date, tim
 - Copy results as plain text
 - Shareable URL state
 - Responsive dark UI
-
-## Screenshots
-
-Screenshots will be added for the v1.0.0 release.
 
 ## Tech Stack
 
